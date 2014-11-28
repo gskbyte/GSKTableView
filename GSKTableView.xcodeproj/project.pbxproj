@@ -1,0 +1,434 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C08699611A28FD6F00A82663 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C08699601A28FD6F00A82663 /* main.m */; };
+		C08699641A28FD6F00A82663 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C08699631A28FD6F00A82663 /* AppDelegate.m */; };
+		C08699661A28FD6F00A82663 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C08699651A28FD6F00A82663 /* Images.xcassets */; };
+		C08699751A28FD7000A82663 /* GSKTableViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C08699741A28FD7000A82663 /* GSKTableViewTests.m */; };
+		C08699801A28FD8F00A82663 /* GSKTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C086997F1A28FD8F00A82663 /* GSKTableView.m */; };
+		C08699831A28FD9C00A82663 /* GSKTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C08699821A28FD9C00A82663 /* GSKTableViewController.m */; };
+		C08699871A290B0700A82663 /* GSKTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C08699861A290B0700A82663 /* GSKTableViewCell.m */; };
+		C086998A1A2913EB00A82663 /* GSKTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = C08699891A2913EB00A82663 /* GSKTestController.m */; };
+		C086998D1A2918F300A82663 /* GSKTableViewCellRed.m in Sources */ = {isa = PBXBuildFile; fileRef = C086998C1A2918F300A82663 /* GSKTableViewCellRed.m */; };
+		C08699901A29191E00A82663 /* GSKTableViewCellBlue.m in Sources */ = {isa = PBXBuildFile; fileRef = C086998F1A29191E00A82663 /* GSKTableViewCellBlue.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C086996F1A28FD7000A82663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C08699531A28FD6F00A82663 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C086995A1A28FD6F00A82663;
+			remoteInfo = GSKTableView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C086995B1A28FD6F00A82663 /* GSKTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSKTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C086995F1A28FD6F00A82663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C08699601A28FD6F00A82663 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C08699621A28FD6F00A82663 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C08699631A28FD6F00A82663 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C08699651A28FD6F00A82663 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C086996E1A28FD7000A82663 /* GSKTableViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GSKTableViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C08699731A28FD7000A82663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C08699741A28FD7000A82663 /* GSKTableViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSKTableViewTests.m; sourceTree = "<group>"; };
+		C086997E1A28FD8F00A82663 /* GSKTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSKTableView.h; sourceTree = "<group>"; };
+		C086997F1A28FD8F00A82663 /* GSKTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSKTableView.m; sourceTree = "<group>"; };
+		C08699811A28FD9C00A82663 /* GSKTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSKTableViewController.h; sourceTree = "<group>"; };
+		C08699821A28FD9C00A82663 /* GSKTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSKTableViewController.m; sourceTree = "<group>"; };
+		C08699841A29089D00A82663 /* GSKMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSKMacros.h; sourceTree = "<group>"; };
+		C08699851A290B0700A82663 /* GSKTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSKTableViewCell.h; sourceTree = "<group>"; };
+		C08699861A290B0700A82663 /* GSKTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSKTableViewCell.m; sourceTree = "<group>"; };
+		C08699881A2913EB00A82663 /* GSKTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSKTestController.h; sourceTree = "<group>"; };
+		C08699891A2913EB00A82663 /* GSKTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSKTestController.m; sourceTree = "<group>"; };
+		C086998B1A2918F300A82663 /* GSKTableViewCellRed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSKTableViewCellRed.h; sourceTree = "<group>"; };
+		C086998C1A2918F300A82663 /* GSKTableViewCellRed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSKTableViewCellRed.m; sourceTree = "<group>"; };
+		C086998E1A29191E00A82663 /* GSKTableViewCellBlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSKTableViewCellBlue.h; sourceTree = "<group>"; };
+		C086998F1A29191E00A82663 /* GSKTableViewCellBlue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSKTableViewCellBlue.m; sourceTree = "<group>"; };
+		C08699941A291F7600A82663 /* GSKTableViewCell_Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSKTableViewCell_Protected.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C08699581A28FD6F00A82663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C086996B1A28FD7000A82663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C08699521A28FD6F00A82663 = {
+			isa = PBXGroup;
+			children = (
+				C086995D1A28FD6F00A82663 /* GSKTableView */,
+				C08699711A28FD7000A82663 /* GSKTableViewTests */,
+				C086995C1A28FD6F00A82663 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C086995C1A28FD6F00A82663 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C086995B1A28FD6F00A82663 /* GSKTableView.app */,
+				C086996E1A28FD7000A82663 /* GSKTableViewTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C086995D1A28FD6F00A82663 /* GSKTableView */ = {
+			isa = PBXGroup;
+			children = (
+				C08699621A28FD6F00A82663 /* AppDelegate.h */,
+				C08699631A28FD6F00A82663 /* AppDelegate.m */,
+				C08699651A28FD6F00A82663 /* Images.xcassets */,
+				C086995E1A28FD6F00A82663 /* Supporting Files */,
+				C086997E1A28FD8F00A82663 /* GSKTableView.h */,
+				C086997F1A28FD8F00A82663 /* GSKTableView.m */,
+				C08699811A28FD9C00A82663 /* GSKTableViewController.h */,
+				C08699821A28FD9C00A82663 /* GSKTableViewController.m */,
+				C08699841A29089D00A82663 /* GSKMacros.h */,
+				C08699851A290B0700A82663 /* GSKTableViewCell.h */,
+				C08699861A290B0700A82663 /* GSKTableViewCell.m */,
+				C08699881A2913EB00A82663 /* GSKTestController.h */,
+				C08699891A2913EB00A82663 /* GSKTestController.m */,
+				C086998B1A2918F300A82663 /* GSKTableViewCellRed.h */,
+				C086998C1A2918F300A82663 /* GSKTableViewCellRed.m */,
+				C086998E1A29191E00A82663 /* GSKTableViewCellBlue.h */,
+				C086998F1A29191E00A82663 /* GSKTableViewCellBlue.m */,
+				C08699941A291F7600A82663 /* GSKTableViewCell_Protected.h */,
+			);
+			path = GSKTableView;
+			sourceTree = "<group>";
+		};
+		C086995E1A28FD6F00A82663 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C086995F1A28FD6F00A82663 /* Info.plist */,
+				C08699601A28FD6F00A82663 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C08699711A28FD7000A82663 /* GSKTableViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				C08699741A28FD7000A82663 /* GSKTableViewTests.m */,
+				C08699721A28FD7000A82663 /* Supporting Files */,
+			);
+			path = GSKTableViewTests;
+			sourceTree = "<group>";
+		};
+		C08699721A28FD7000A82663 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C08699731A28FD7000A82663 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C086995A1A28FD6F00A82663 /* GSKTableView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C08699781A28FD7000A82663 /* Build configuration list for PBXNativeTarget "GSKTableView" */;
+			buildPhases = (
+				C08699571A28FD6F00A82663 /* Sources */,
+				C08699581A28FD6F00A82663 /* Frameworks */,
+				C08699591A28FD6F00A82663 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GSKTableView;
+			productName = GSKTableView;
+			productReference = C086995B1A28FD6F00A82663 /* GSKTableView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C086996D1A28FD7000A82663 /* GSKTableViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C086997B1A28FD7000A82663 /* Build configuration list for PBXNativeTarget "GSKTableViewTests" */;
+			buildPhases = (
+				C086996A1A28FD7000A82663 /* Sources */,
+				C086996B1A28FD7000A82663 /* Frameworks */,
+				C086996C1A28FD7000A82663 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C08699701A28FD7000A82663 /* PBXTargetDependency */,
+			);
+			name = GSKTableViewTests;
+			productName = GSKTableViewTests;
+			productReference = C086996E1A28FD7000A82663 /* GSKTableViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C08699531A28FD6F00A82663 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = gskbyte;
+				TargetAttributes = {
+					C086995A1A28FD6F00A82663 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					C086996D1A28FD7000A82663 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = C086995A1A28FD6F00A82663;
+					};
+				};
+			};
+			buildConfigurationList = C08699561A28FD6F00A82663 /* Build configuration list for PBXProject "GSKTableView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C08699521A28FD6F00A82663;
+			productRefGroup = C086995C1A28FD6F00A82663 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C086995A1A28FD6F00A82663 /* GSKTableView */,
+				C086996D1A28FD7000A82663 /* GSKTableViewTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C08699591A28FD6F00A82663 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C08699661A28FD6F00A82663 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C086996C1A28FD7000A82663 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C08699571A28FD6F00A82663 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C086998D1A2918F300A82663 /* GSKTableViewCellRed.m in Sources */,
+				C08699901A29191E00A82663 /* GSKTableViewCellBlue.m in Sources */,
+				C08699641A28FD6F00A82663 /* AppDelegate.m in Sources */,
+				C08699611A28FD6F00A82663 /* main.m in Sources */,
+				C08699801A28FD8F00A82663 /* GSKTableView.m in Sources */,
+				C086998A1A2913EB00A82663 /* GSKTestController.m in Sources */,
+				C08699831A28FD9C00A82663 /* GSKTableViewController.m in Sources */,
+				C08699871A290B0700A82663 /* GSKTableViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C086996A1A28FD7000A82663 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C08699751A28FD7000A82663 /* GSKTableViewTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C08699701A28FD7000A82663 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C086995A1A28FD6F00A82663 /* GSKTableView */;
+			targetProxy = C086996F1A28FD7000A82663 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C08699761A28FD7000A82663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C08699771A28FD7000A82663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C08699791A28FD7000A82663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GSKTableView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C086997A1A28FD7000A82663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GSKTableView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		C086997C1A28FD7000A82663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GSKTableViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GSKTableView.app/GSKTableView";
+			};
+			name = Debug;
+		};
+		C086997D1A28FD7000A82663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GSKTableViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GSKTableView.app/GSKTableView";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C08699561A28FD6F00A82663 /* Build configuration list for PBXProject "GSKTableView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C08699761A28FD7000A82663 /* Debug */,
+				C08699771A28FD7000A82663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C08699781A28FD7000A82663 /* Build configuration list for PBXNativeTarget "GSKTableView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C08699791A28FD7000A82663 /* Debug */,
+				C086997A1A28FD7000A82663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		C086997B1A28FD7000A82663 /* Build configuration list for PBXNativeTarget "GSKTableViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C086997C1A28FD7000A82663 /* Debug */,
+				C086997D1A28FD7000A82663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C08699531A28FD6F00A82663 /* Project object */;
+}
