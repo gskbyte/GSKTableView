@@ -53,7 +53,7 @@
     frame.size.height = [[self.heights[section] objectAtIndex:row] floatValue];
     cell.frame = frame;
 
-    NSLog(@"cellForRowInSection:%zd atRow:%zd", section, row);
+    NSLog(@"cellForRowInSection:atRow: %zd-%zd", section, row);
 
     return cell;
 }

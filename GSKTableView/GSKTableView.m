@@ -219,7 +219,7 @@ const static CGFloat GSKInvalidCellHeight = -1;
             for(NSInteger s=minTopSection; s>=0 && y>visibleTop; --s) {
                 const NSUInteger numRows = [self numberOfRowsInSection:s];
                 const NSInteger initialRow = (s==minTopSection) ? minTopRow-1 : numRows-1;
-                for(NSInteger r=initialRow; r>=0 && y>visibleTop; ++r) {
+                for(NSInteger r=initialRow; r>=0 && y>visibleTop; --r) {
                     CGFloat cachedHeight = [self cachedHeightForCellInSection:s atRow:r];
                     y -= [self requestAndDisplayCellInSection:s atRow:r top:y-cachedHeight];
                 }
