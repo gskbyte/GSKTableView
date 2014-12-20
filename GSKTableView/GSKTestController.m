@@ -17,12 +17,12 @@
     [super viewDidLoad];
 
     self.heights = [NSMutableArray array];
-    NSUInteger numSections = 2 + arc4random_uniform(10); // 2 to 5 sections
+    NSUInteger numSections = 2 + arc4random_uniform(3);
     for(NSUInteger s=0; s<numSections; ++s) {
         NSMutableArray *sectionHeights = [NSMutableArray array];
-        NSUInteger numItems = 10 + arc4random_uniform(30); // between 10 and 20
+        NSUInteger numItems = 10 + arc4random_uniform(10);
         for(NSUInteger i=0; i<numItems; ++i) {
-            NSUInteger height = 50 + arc4random_uniform(200);
+            NSUInteger height = 10 + arc4random_uniform(200);
             [sectionHeights addObject:@(height)];
         }
 

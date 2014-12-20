@@ -14,12 +14,13 @@ const static CGFloat GSKInvalidCellHeight = -1;
 @property (nonatomic, readonly) NSMutableArray *cellHeights;
 @property (nonatomic, readonly) NSCache *cellCache;
 @property (nonatomic, readonly) CGFloat estimatedCellHeight;
+@property (nonatomic, readonly) NSUInteger totalCells;
 
 @end
 
 @implementation GSKTableView
 
-@synthesize estimatedCellHeight=_estimatedCellHeight;
+@synthesize estimatedCellHeight=_estimatedCellHeight, totalCells=_totalCells;
 
 #pragma mark - setup
 
@@ -32,7 +33,6 @@ const static CGFloat GSKInvalidCellHeight = -1;
 }
 
 - (void)setup {
-
     _visibleCells = [NSMutableArray array];
     _cellHeights = [NSMutableArray array];
     _cellCache = [[NSCache alloc] init];
@@ -146,17 +146,24 @@ const static CGFloat GSKInvalidCellHeight = -1;
 }
 
 - (NSUInteger)totalCells {
-    NSUInteger totalCells = 0;
-    const NSUInteger numSections = self.numberOfSections;
-    for (NSUInteger s=0; s<numSections; ++s) {
-        totalCells += [self numberOfRowsInSection:s];
+    if(_totalCells == 0) {
+        _totalCells = 0;
+        const NSUInteger numSections = self.numberOfSections;
+        for (NSUInteger s=0; s<numSections; ++s) {
+            _totalCells += [self numberOfRowsInSection:s];
+        }
     }
-    return totalCells;
+    return _totalCells;
+}
+
+- (void)invalidateTotalCells {
+    _totalCells = 0;
 }
 
 - (void)recomputeContentSize {
     CGSize contentSize = CGSizeMake(self.frame.size.width, 0);
     contentSize.height = self.estimatedCellHeight * self.totalCells;
+
     [self setContentSize:contentSize];
 }
 
@@ -261,6 +268,7 @@ const static CGFloat GSKInvalidCellHeight = -1;
     cell.row = row;
 
     [self addSubview:cell];
+    [self sendSubviewToBack:cell];
     [_visibleCells addObject:cell];
     [self setCachedHeight:cellHeight forCellInSection:section atRow:row];
 
