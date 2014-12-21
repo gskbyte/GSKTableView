@@ -1,13 +1,17 @@
 #import "GSKTableView.h"
+#import "GSKTableView_Private.h"
+#import "GSKTableView+DelegateHelper.h"
+
 #import "GSKMacros.h"
 #import "GSKTableViewCell.h"
 #import "GSKTableViewCell_Protected.h"
+#import "UIView+Frame.h"
+#import "GSKTableViewTapGestureRecognizer.h"
 
 const static CGFloat GSKInvalidCellHeight = -1;
 
-@interface GSKTableView () <UIScrollViewDelegate> {
+@interface GSKTableView () <UIScrollViewDelegate, GSKTableViewTapGestureRecognizerDelegate> {
     id<GSKTableViewDelegate> _overridenDelegate;
-    BOOL _delegateRespondsToDidScroll;
     NSMutableArray *_visibleCells;
 }
 
@@ -15,6 +19,8 @@ const static CGFloat GSKInvalidCellHeight = -1;
 @property (nonatomic, readonly) NSCache *cellCache;
 @property (nonatomic, readonly) CGFloat estimatedCellHeight;
 @property (nonatomic, readonly) NSUInteger totalCells;
+
+@property (nonatomic) GSKTableViewTapGestureRecognizer *tapRecognizer;
 
 @end
 
@@ -36,6 +42,11 @@ const static CGFloat GSKInvalidCellHeight = -1;
     _visibleCells = [NSMutableArray array];
     _cellHeights = [NSMutableArray array];
     _cellCache = [[NSCache alloc] init];
+
+    _tapRecognizer = [[GSKTableViewTapGestureRecognizer alloc] initWithTarget:self
+                                                                       action:@selector(didTap:)];
+    _tapRecognizer.delegate = self;
+    [self addGestureRecognizer:_tapRecognizer];
 }
 
 - (void)didMoveToWindow {
@@ -46,31 +57,32 @@ const static CGFloat GSKInvalidCellHeight = -1;
     }
 }
 
+#pragma mark - public methods
+
+- (NSUInteger)numberOfSections {
+    RETURN_FROM_DELEGATE_IF_RESPONDS(self.dataSource,
+                                     @selector(numberOfSectionsInTableView:),
+                                     [self.dataSource numberOfSectionsInTableView:self],
+                                     1);
+}
+
+- (NSUInteger)numberOfRowsInSection:(NSUInteger)section {
+    if([self.dataSource respondsToSelector:@selector(tableView:numberOfRowsInSection:)]) {
+        NSLog(@"");
+    }
+
+    RETURN_FROM_DELEGATE_OR_CRASH(self.dataSource,
+                                  @selector(tableView:numberOfRowsInSection:),
+                                  [self.dataSource tableView:self numberOfRowsInSection:section],
+                                  @"Implement -tableView:numberOfRowsInSection: in tableView dataSource");
+}
+
 #pragma mark - Properties
 
 - (NSArray *)visibleCells {
     return _visibleCells;
 }
 
-#pragma mark - Rows and sections
-
-- (NSUInteger)numberOfSections {
-    RETURN_FROM_DELEGATE_IF_RESPONDS(_dataSource,
-                                     @selector(numberOfSectionsInTableView:),
-                                     [_dataSource numberOfSectionsInTableView:self],
-                                     1);
-}
-
-- (NSUInteger)numberOfRowsInSection:(NSUInteger)section {
-    if([_dataSource respondsToSelector:@selector(tableView:numberOfRowsInSection:)]) {
-        NSLog(@"");
-    }
-
-    RETURN_FROM_DELEGATE_OR_CRASH(_dataSource,
-                                  @selector(tableView:numberOfRowsInSection:),
-                                  [_dataSource tableView:self numberOfRowsInSection:section],
-                                  @"Implement -tableView:numberOfRowsInSection: in tableView dataSource");
-}
 
 #pragma mark - Queue management
 
@@ -100,6 +112,13 @@ const static CGFloat GSKInvalidCellHeight = -1;
     [cell removeFromSuperview];
 }
 
+#pragma mark - invalidation 
+
+- (void)notifyDataSourceChanged {
+    [self invalidateEstimatedCellHeight];
+    [self recomputeContentSize];
+}
+
 #pragma mark - Overriden properties
 
 - (id<UIScrollViewDelegate>)delegate {
@@ -108,17 +127,69 @@ const static CGFloat GSKInvalidCellHeight = -1;
 
 - (void)setDelegate:(id<GSKTableViewDelegate>)delegate {
     _overridenDelegate = delegate;
-    _delegateRespondsToDidScroll = [_overridenDelegate respondsToSelector:@selector(scrollViewDidScroll:)];
 }
 
 - (void)setDataSource:(id<GSKTableViewDataSource>)dataSource {
     _dataSource = dataSource;
-
-    [self invalidateEstimatedCellHeight];
-    [self recomputeContentSize];
+    [self notifyDataSourceChanged];
 }
 
-#pragma mark - Protected stuff
+#pragma mark - touch and selection
+
+- (GSKTableViewCell *)cellForGestureRecognizer:(UIGestureRecognizer*)recognizer {
+    CGPoint location = [recognizer locationInView:self];
+    UIView *tappedSubview = [self hitTest:location withEvent:nil];
+    if([tappedSubview isKindOfClass:GSKTableViewCell.class]) {
+        return (GSKTableViewCell*) tappedSubview;
+    } else {
+        return nil;
+    }
+}
+
+
+- (void)didTap:(UIGestureRecognizer*)tapRecognizer {
+    GSKTableViewCell *cell = [self cellForGestureRecognizer:tapRecognizer];
+    if(cell != nil) {
+        [self notifyDidTapCellInSection:cell.section
+                                  atRow:cell.row];
+        if([self canHighlightCellInSection:cell.section atRow:cell.row]) {
+            [self notifyWillUnhighlightCellInSection:cell.section atRow:cell.row];
+            cell.highlighted = NO;
+        }
+    }
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if(gestureRecognizer != self.tapRecognizer) {
+        return [super gestureRecognizerShouldBegin:gestureRecognizer];
+    }
+
+    GSKTableViewCell *cell = [self cellForGestureRecognizer:gestureRecognizer];
+    if(cell != nil) {
+        if([self canHighlightCellInSection:cell.section atRow:cell.row]) {
+            [self notifyWillHighlightCellInSection:cell.section atRow:cell.row];
+            cell.highlighted = YES;
+        }
+    }
+
+    return YES;
+}
+
+- (void)gestureRecognizerDidFail:(UIGestureRecognizer *)gestureRecognizer {
+    if(gestureRecognizer != self.tapRecognizer) {
+        return;
+    }
+
+    GSKTableViewCell *cell = [self cellForGestureRecognizer:gestureRecognizer];
+    if(cell != nil) {
+        if([self canHighlightCellInSection:cell.section atRow:cell.row]) {
+            [self notifyWillUnhighlightCellInSection:cell.section atRow:cell.row];
+            cell.highlighted = NO;
+        }
+    }
+}
+
+#pragma mark - size calculation
 
 - (CGFloat)estimatedCellHeight {
     if(_estimatedCellHeight == GSKInvalidCellHeight) {
@@ -219,60 +290,69 @@ const static CGFloat GSKInvalidCellHeight = -1;
         maxTopRow = -1;
     }
 
+    BOOL invalidateSize = NO;
     const NSUInteger numSections = self.numberOfSections;
-        // try to fill back min
-        if(minTop > visibleTop) {
-            CGFloat y = minTop;
-            for(NSInteger s=minTopSection; s>=0 && y>visibleTop; --s) {
-                const NSUInteger numRows = [self numberOfRowsInSection:s];
-                const NSInteger initialRow = (s==minTopSection) ? minTopRow-1 : numRows-1;
-                for(NSInteger r=initialRow; r>=0 && y>visibleTop; --r) {
-                    CGFloat cachedHeight = [self cachedHeightForCellInSection:s atRow:r];
-                    y -= [self requestAndDisplayCellInSection:s atRow:r top:y-cachedHeight];
-                }
 
-
+    // try to fill back min
+    if(minTop > visibleTop) {
+        CGFloat y = minTop;
+        for(NSInteger s=minTopSection; s>=0 && y>visibleTop; --s) {
+            const NSUInteger numRows = [self numberOfRowsInSection:s];
+            const NSInteger initialRow = (s==minTopSection) ? minTopRow-1 : numRows-1;
+            for(NSInteger r=initialRow; r>=0 && y>visibleTop; --r) {
+                CGFloat cachedHeight = [self cachedHeightForCellInSection:s atRow:r];
+                GSKTableViewCell *cell = [self requestAndLayoutCellInSection:s atRow:r top:y-cachedHeight];
+                y -= cell.height;
             }
-            [self invalidateEstimatedCellHeight];
-            [self recomputeContentSize];
         }
+    }
 
-        // and forth max
-        if(maxTop < visibleBottom) {
-            CGFloat y = maxTop;
-            for(NSUInteger s=maxTopSection; s<numSections && y<visibleBottom; ++s) {
-                const NSUInteger initialRow = (s==maxTopSection) ? maxTopRow+1 : 0;
-                const NSUInteger numRows = [self numberOfRowsInSection:s];
-                for(NSUInteger r=initialRow; r<numRows && y<visibleBottom; ++r) {
-                    y += [self requestAndDisplayCellInSection:s atRow:r top:y];
+    // and forth max
+    if(maxTop < visibleBottom) {
+        CGFloat y = maxTop;
+        for(NSUInteger s=maxTopSection; s<numSections && y<visibleBottom; ++s) {
+            const NSUInteger initialRow = (s==maxTopSection) ? maxTopRow+1 : 0;
+            const NSUInteger numRows = [self numberOfRowsInSection:s];
+            for(NSUInteger r=initialRow; r<numRows && y<visibleBottom; ++r) {
+                CGFloat cachedHeight = [self cachedHeightForCellInSection:s atRow:r];
+                GSKTableViewCell *cell = [self requestAndLayoutCellInSection:s atRow:r top:y];
+                y += cell.height;
+                if(cachedHeight != cell.height) {
+                    invalidateSize = YES;
                 }
             }
-            [self invalidateEstimatedCellHeight];
-            [self recomputeContentSize];
         }
+    }
+
+    if(invalidateSize) {
+        [self invalidateEstimatedCellHeight];
+        [self recomputeContentSize];
+    }
 }
 
-- (CGFloat)requestAndDisplayCellInSection:(NSUInteger)section
-                                    atRow:(NSUInteger)row
-                                      top:(CGFloat)top {
+- (GSKTableViewCell *)requestAndLayoutCellInSection:(NSUInteger)section
+                                              atRow:(NSUInteger)row
+                                                top:(CGFloat)top {
     GSKTableViewCell *cell = [self.dataSource tableView:self
                                     cellForRowInSection:section
                                                   atRow:row];
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
 
-    CGFloat cellHeight = cell.frame.size.height;
+    CGFloat cellHeight = cell.height;
 
-    cell.frameInTableView = CGRectMake(0, top, self.frame.size.width, cellHeight);
+    cell.frameInTableView = CGRectMake(0, top, self.width, cellHeight);
     cell.section = section;
     cell.row = row;
 
     [self addSubview:cell];
-    [self sendSubviewToBack:cell];
+    [self bringSubviewToFront:cell];
     [_visibleCells addObject:cell];
     [self setCachedHeight:cellHeight forCellInSection:section atRow:row];
 
-    return cellHeight;
+    [self notifyDelegateWillDisplayCell:cell inSection:section atRow:row];
+
+    return cell;
 }
 
 - (CGFloat)cachedHeightForCellInSection:(NSUInteger)section
@@ -312,122 +392,6 @@ const static CGFloat GSKInvalidCellHeight = -1;
     } else {
         [sectionArray insertPointer:(__bridge void *)(@(height)) atIndex:row];
     }
-}
-
-#pragma mark - UIScrollViewDelegate methods
-
-
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGRect visibleRect = self.bounds;
-    visibleRect.origin.y -= self.contentInset.top;
-
-    [self layoutVisibleRect:visibleRect];
-
-
-    if(_delegateRespondsToDidScroll) {
-        [_overridenDelegate scrollViewDidScroll:scrollView];
-    }
-}
-
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    SEND_TO_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                 @selector(scrollViewDidZoom:),
-                                 [_overridenDelegate scrollViewDidZoom:scrollView]);
-}
-
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    SEND_TO_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                 @selector(scrollViewWillBeginDragging:),
-                                 [_overridenDelegate scrollViewWillBeginDragging:scrollView]);
-
-}
-
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
-                     withVelocity:(CGPoint)velocity
-              targetContentOffset:(inout CGPoint *)targetContentOffset {
-    SEND_TO_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                 @selector(scrollViewWillEndDragging:withVelocity:targetContentOffset:),
-                                 [_overridenDelegate scrollViewWillEndDragging:scrollView
-                                                                  withVelocity:velocity
-                                                           targetContentOffset:targetContentOffset]);
-
-}
-
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
-                  willDecelerate:(BOOL)decelerate {
-    SEND_TO_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                 @selector(scrollViewDidEndDragging:willDecelerate:),
-                                 [_overridenDelegate scrollViewDidEndDragging:scrollView
-                                                               willDecelerate:decelerate]);
-
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    SEND_TO_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                 @selector(scrollViewWillBeginDecelerating:),
-                                 [_overridenDelegate scrollViewWillBeginDecelerating:scrollView]);
-
-}
-
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    SEND_TO_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                 @selector(scrollViewDidEndDecelerating:),
-                                 [_overridenDelegate scrollViewDidEndDecelerating:scrollView]);
-
-}
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    SEND_TO_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                 @selector(scrollViewDidEndScrollingAnimation:),
-                                 [_overridenDelegate scrollViewDidEndScrollingAnimation:scrollView]);
-
-}
-
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    RETURN_FROM_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                     @selector(viewForZoomingInScrollView:),
-                                     [_overridenDelegate viewForZoomingInScrollView:scrollView],
-                                     nil);
-
-}
-
-- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView
-                          withView:(UIView *)view {
-    SEND_TO_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                 @selector(scrollViewWillBeginZooming:withView:),
-                                 [_overridenDelegate scrollViewWillBeginZooming:scrollView
-                                                                       withView:view]);
-
-}
-
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView
-                       withView:(UIView *)view
-                        atScale:(CGFloat)scale {
-    SEND_TO_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                 @selector(scrollViewDidEndZooming:withView:atScale:),
-                                 [_overridenDelegate scrollViewDidEndZooming:scrollView
-                                                                    withView:view
-                                                                     atScale:scale]);
-
-}
-
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    RETURN_FROM_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                     @selector(scrollViewShouldScrollToTop:),
-                                     [_overridenDelegate scrollViewShouldScrollToTop:scrollView],
-                                     NO);
-    
-}
-
-- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
-    SEND_TO_DELEGATE_IF_RESPONDS(_overridenDelegate,
-                                 @selector(scrollViewDidScrollToTop:),
-                                 [_overridenDelegate scrollViewDidScrollToTop:scrollView]);
-    
 }
 
 

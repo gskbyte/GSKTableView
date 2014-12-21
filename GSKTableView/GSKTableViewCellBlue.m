@@ -10,5 +10,10 @@
     return self;
 }
 
+- (void)setHighlighted:(BOOL)highlighted {
+    [super setHighlighted:highlighted];
+    self.backgroundColor = highlighted ? [UIColor cyanColor] : [UIColor blueColor];
+}
+
 
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C02306F81A463475003F6319 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = C02306F71A463475003F6319 /* UIView+Frame.m */; };
+		C02306FB1A463573003F6319 /* GSKTableView+DelegateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C02306FA1A463573003F6319 /* GSKTableView+DelegateHelper.m */; };
+		C02306FF1A4641EF003F6319 /* GSKTableViewTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = C02306FE1A4641EF003F6319 /* GSKTableViewTapGestureRecognizer.m */; };
 		C08699611A28FD6F00A82663 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C08699601A28FD6F00A82663 /* main.m */; };
 		C08699641A28FD6F00A82663 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C08699631A28FD6F00A82663 /* AppDelegate.m */; };
 		C08699661A28FD6F00A82663 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C08699651A28FD6F00A82663 /* Images.xcassets */; };
@@ -30,6 +33,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C02306F61A463475003F6319 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		C02306F71A463475003F6319 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		C02306F91A463573003F6319 /* GSKTableView+DelegateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSKTableView+DelegateHelper.h"; sourceTree = "<group>"; };
+		C02306FA1A463573003F6319 /* GSKTableView+DelegateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GSKTableView+DelegateHelper.m"; sourceTree = "<group>"; };
+		C02306FC1A4635B9003F6319 /* GSKTableView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSKTableView_Private.h; sourceTree = "<group>"; };
+		C02306FD1A4641EF003F6319 /* GSKTableViewTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSKTableViewTapGestureRecognizer.h; sourceTree = "<group>"; };
+		C02306FE1A4641EF003F6319 /* GSKTableViewTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSKTableViewTapGestureRecognizer.m; sourceTree = "<group>"; };
 		C086995B1A28FD6F00A82663 /* GSKTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSKTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C086995F1A28FD6F00A82663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C08699601A28FD6F00A82663 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -112,6 +122,13 @@
 				C086998E1A29191E00A82663 /* GSKTableViewCellBlue.h */,
 				C086998F1A29191E00A82663 /* GSKTableViewCellBlue.m */,
 				C08699941A291F7600A82663 /* GSKTableViewCell_Protected.h */,
+				C02306F61A463475003F6319 /* UIView+Frame.h */,
+				C02306F71A463475003F6319 /* UIView+Frame.m */,
+				C02306F91A463573003F6319 /* GSKTableView+DelegateHelper.h */,
+				C02306FA1A463573003F6319 /* GSKTableView+DelegateHelper.m */,
+				C02306FC1A4635B9003F6319 /* GSKTableView_Private.h */,
+				C02306FD1A4641EF003F6319 /* GSKTableViewTapGestureRecognizer.h */,
+				C02306FE1A4641EF003F6319 /* GSKTableViewTapGestureRecognizer.m */,
 			);
 			path = GSKTableView;
 			sourceTree = "<group>";
@@ -152,6 +169,7 @@
 				C08699571A28FD6F00A82663 /* Sources */,
 				C08699581A28FD6F00A82663 /* Frameworks */,
 				C08699591A28FD6F00A82663 /* Resources */,
+				924DB879C1284F894DA92F34 /* Find unused imports */,
 			);
 			buildRules = (
 			);
@@ -235,6 +253,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		924DB879C1284F894DA92F34 /* Find unused imports */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Find unused imports";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"/Users/jose.alcala/Library/Application Support/Developer/Shared/Xcode/Plug-ins/xcfui.xcplugin/Contents/Resources/fui_script.sh\" \"/Users/jose.alcala/code/own/GSKTableView\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C08699571A28FD6F00A82663 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -243,8 +278,11 @@
 				C086998D1A2918F300A82663 /* GSKTableViewCellRed.m in Sources */,
 				C08699901A29191E00A82663 /* GSKTableViewCellBlue.m in Sources */,
 				C08699641A28FD6F00A82663 /* AppDelegate.m in Sources */,
+				C02306FF1A4641EF003F6319 /* GSKTableViewTapGestureRecognizer.m in Sources */,
+				C02306F81A463475003F6319 /* UIView+Frame.m in Sources */,
 				C08699611A28FD6F00A82663 /* main.m in Sources */,
 				C08699801A28FD8F00A82663 /* GSKTableView.m in Sources */,
+				C02306FB1A463573003F6319 /* GSKTableView+DelegateHelper.m in Sources */,
 				C086998A1A2913EB00A82663 /* GSKTestController.m in Sources */,
 				C08699831A28FD9C00A82663 /* GSKTableViewController.m in Sources */,
 				C08699871A290B0700A82663 /* GSKTableViewCell.m in Sources */,
@@ -419,6 +457,7 @@
 				C086997A1A28FD7000A82663 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C086997B1A28FD7000A82663 /* Build configuration list for PBXNativeTarget "GSKTableViewTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +466,7 @@
 				C086997D1A28FD7000A82663 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
